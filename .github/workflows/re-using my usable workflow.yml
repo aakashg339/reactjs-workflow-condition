@@ -1,4 +1,4 @@
-name: Test and Build Workflow
+name: reusable workflow
 on:
   push:
     branches:
@@ -67,7 +67,4 @@ jobs:
           path: dist
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: reusable fetch
-        uses: ./.github/workflows/reuse.yaml
+    uses: ./.github/workflows/reuse.yaml
