@@ -70,3 +70,12 @@ jobs:
     uses: ./.github/workflows/reuse.yaml
     with:
       artifact-name: dist-files
+    # secrets:
+    #   password: ${{ secrets.password }}
+  
+  print-output:
+    needs: deploy
+    runs-on: ubuntu-slim
+    steps:
+      - name: getting output
+        run: echo ${{ needs.deploy.outputs.result }}

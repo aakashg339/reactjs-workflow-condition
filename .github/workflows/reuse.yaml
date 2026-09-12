@@ -7,8 +7,17 @@ on:
                 required: false
                 default: dist
                 type: string
+        # secrets:
+        #     password:
+        #         required: true
+        outputs:
+            result:
+                description: your result name
+                value: ${{ jobs.deploy.outputs.outcome }}
 jobs:
     deploy:
+        outputs:
+            outcome: ${{ steps.set-result.outputs.set-result }}
         runs-on: ubuntu-slim
         steps:
             - name: get artifact
@@ -17,3 +26,6 @@ jobs:
                 name: ${{ inputs.artifact-name }}
             - name: list artifact name
               run: ls
+            - name: set the output
+              id: set-result
+              run: echo "step-result=success" >> $GITHUB_OUTPUT
